@@ -1,38 +1,343 @@
-.App {
-  text-align: center;
+/* src/App.css */
+
+/* --- Navbar Styles --- */
+.navbar {
+  background-color: #5c3f6f; /* Morado de Friends */
+  padding: 1rem 0;
+  border-bottom: 4px solid #f0c000; /* Amarillo del marco de Friends */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navbar-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.navbar .nav-links,
+.navbar .user-actions {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar .nav-links {
+  margin-bottom: 10px;
+}
+
+.navbar li {
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.navbar a,
+.navbar .user-actions span {
   color: white;
+  text-decoration: none;
+  font-size: 1.1em;
+  padding: 10px 15px;
+  border-radius: 4px;
+  display: block;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar a:hover,
+.navbar a.active {
+  background-color: #f0c000;
+  color: #5c3f6f;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.navbar .user-actions button {
+  background-color: #f0c000;
+  color: #5c3f6f;
+  border: none;
+  font-weight: bold;
+  width: auto;
+  padding: 10px 20px;
+  display: inline-block;
+}
+.navbar .user-actions button:hover {
+  background-color: #d4a900;
+}
+.navbar .user-actions span {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .navbar-content {
+    flex-direction: row;
+    justify-content: space-between;
   }
-  to {
-    transform: rotate(360deg);
+  .navbar .nav-links,
+  .navbar .user-actions {
+    flex-direction: row;
+    width: auto;
+  }
+  .navbar .nav-links {
+    margin-bottom: 0;
+  }
+  .navbar li {
+    margin-bottom: 0;
+    margin-right: 10px;
+    width: auto;
+  }
+  .navbar li:last-child {
+    margin-right: 0;
+  }
+  .navbar .user-actions span {
+    margin-bottom: 0;
+    margin-right: 15px;
+  }
+}
+
+/* --- Recipe List Styles --- */
+.recipes-grid {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0; /* Añadido margen superior */
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.recipe-list-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-list-item img {
+  border-radius: 4px;
+  margin-bottom: 10px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.recipe-list-item h3 {
+  margin-top: 0;
+  font-size: 1.25em;
+}
+.recipe-list-item h3 a {
+  color: #5c3f6f;
+}
+.recipe-list-item h3 a:hover {
+  color: #f0c000;
+}
+
+.recipe-list-item p {
+  font-size: 0.9em;
+  margin-bottom: 8px;
+  flex-grow: 1;
+}
+.recipe-list-item strong {
+    color: #333;
+}
+
+@media (min-width: 600px) { /* Ajustado punto de quiebre para 2 columnas */
+  .recipes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) { /* Ajustado punto de quiebre para 3 columnas */
+  .recipes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Recipe Detail Page Styles --- */
+.recipe-detail-page img { /* Estilo para la imagen grande en la página de detalle */
+  /* width: 100%; // 'img' global ya lo tiene */
+  max-width: 600px;
+  /* height: auto; // 'img' global ya lo tiene */
+  margin: 0 auto 25px auto; /* Centrar imagen y más espacio abajo */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.recipe-detail-page ul, .recipe-detail-page ol {
+  padding-left: 25px;
+  margin-bottom: 20px;
+}
+.recipe-detail-page li {
+  margin-bottom: 8px;
+}
+
+/* --- Category List Styles --- */
+.category-list-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease-in-out; /* Efecto al pasar el ratón */
+}
+.category-list-item:hover {
+    transform: translateY(-3px); /* Ligeramente elevado al pasar el ratón */
+}
+
+.category-list-item a {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #5c3f6f;
+  display: block;
+}
+.category-list-item a:hover {
+  color: #f0c000;
+  text-decoration: none;
+}
+
+/* --- Form Styles (AddRecipePage, LoginPage) --- */
+.form-page { /* Contenedor de la página del formulario */
+    padding: 20px 0; /* Espacio arriba y abajo */
+}
+
+.form-page form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto; /* Centrar el formulario */
+}
+@media (min-width: 768px) {
+    .form-page form {
+        padding: 30px;
+    }
+}
+
+/* Mensajes de Éxito/Error en formularios */
+.form-message {
+    margin-top: 20px; /* Más espacio arriba */
+    padding: 12px 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+.form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+
+
+
+/* --- HomePage Styles --- */
+.home-page-container {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px; /* Añadir padding abajo también */
+}
+
+.home-intro-text {
+  font-size: 1.2em;
+  color: #444;
+  max-width: 750px; /* Un poco más de ancho para el texto */
+  margin: 20px auto 30px auto; /* Margen arriba, auto horizontal, más margen abajo */
+  line-height: 1.7; /* Mejorar legibilidad */
+}
+
+.home-welcome-image { /* Estilos si decides añadir una imagen */
+  max-width: 100%;   /* Asegurar que sea responsiva */
+  width: 450px;      /* Tamaño deseado, pero no más que el 100% del contenedor */
+  margin: 25px auto;
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* Sombra más pronunciada */
+}
+
+.home-actions {
+  margin-top: 30px;
+  margin-bottom: 40px; /* Más espacio antes del "fun fact" */
+}
+
+.home-button {
+  display: inline-block; /* Para que el margen y padding funcionen bien */
+  margin: 10px;
+  padding: 14px 28px; /* Botones un poco más grandes */
+  font-size: 1.1em;
+  font-weight: bold; /* Texto en negrita */
+  text-decoration: none;
+  border: none; /* Quitar borde por defecto */
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+.home-button:hover {
+  transform: translateY(-2px); /* Ligero levantamiento al pasar el ratón */
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2); /* Sombra más pronunciada al hover */
+}
+
+.home-button.primary {
+  color: white;
+  background-color: #5c3f6f; /* Morado de Friends */
+}
+.home-button.primary:hover {
+  background-color: #4a3258; /* Morado más oscuro */
+}
+
+.home-button.secondary {
+  color: #333;
+  background-color: #f0c000; /* Amarillo de Friends */
+}
+.home-button.secondary:hover {
+  background-color: #d4a900; /* Amarillo más oscuro */
+}
+
+.home-fun-fact {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #eaeaea; /* Separador más sutil */
+  max-width: 600px; /* Limitar ancho */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-fun-fact h3 {
+  color: #5c3f6f; /* Morado */
+  margin-bottom: 10px;
+}
+
+.home-fun-fact p {
+  font-style: italic;
+  color: #555;
+  font-size: 1em;
+}
+
+/* Media query para los botones en pantallas pequeñas */
+@media (max-width: 600px) {
+  .home-actions {
+    display: flex;
+    flex-direction: column; /* Apilar botones */
+    align-items: center; /* Centrar botones apilados */
+  }
+  .home-button {
+    width: 80%; /* Hacer que los botones ocupen más ancho */
+    max-width: 300px; /* Pero no demasiado */
+    margin: 8px 0; /* Ajustar margen para botones apilados */
+  }
+  .home-intro-text {
+    font-size: 1.1em; /* Texto un poco más pequeño en móviles */
   }
 }
